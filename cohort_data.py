@@ -48,22 +48,45 @@ def sort_by_cohort(filename):
     """
 
     all_students = []
+    # create a list for each cohort
+    # ordering students alphabetically by first name 
     winter_15 = []
     spring_15 = []
     summer_15 = []
     tas = []
-
-    # Code goes here
+ 
+    #Is this telling python that we want to iterate over a file? 
     cohort_data = open(filename)
+    # we are breaking lines into lists
+    #list we want to iterate on so we're using a FOR loop 
     for line in cohort_data:
+        
         data = line.split("|")
-        name = data[0:2]
-        cohort = data[-1]
-        if 
+        #this line says name will be the first two items in the list
+        name = data[0] + " " + data[1]
+        cohort = data[4]
+        cohort = cohort.strip()
+        all_students.append(name)
+        #want to identify which stuidents go into which cohort
+        if cohort == "TA":
+            tas.append(name)
+        elif cohort == "Winter 2015": 
+            winter_15.append(name)
+        elif cohort == "Spring 2015": 
+            spring_15.append(name)
+        elif cohort == "Summer 2015": 
+            summer_15.append(name)
+
+    print "Winter cohort", sorted(winter_15)
+    print "Spring 2015", sorted(spring_15)
+    print "Summer 2015", sorted(summer_15)
+    print "TAs", sorted(tas)
+    print "All Students", sorted(all_students)
+
+
     return all_students
-
+#This is the file we are calling as an argument
 sort_by_cohort("cohort_data.txt")
-
 def students_by_house(filename):
     """TODO: Sort students by house.
 
